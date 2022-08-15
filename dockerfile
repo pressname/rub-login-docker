@@ -1,8 +1,8 @@
 FROM alpine:3.16
 
 # UserId and Password are set through 
-ENV user
-ENV password
+ENV user=
+ENV password=
 
 # Set the working directory to /login
 WORKDIR /login
