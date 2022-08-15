@@ -27,4 +27,4 @@ RUN cd login \
     && rc-update add crond
 
 ENTRYPOINT ["/bin/sh"]
-CMD["run-parts --test /etc/periodic/15min"]
+CMD ["run-parts --test /etc/periodic/15min"]
