@@ -23,7 +23,7 @@ RUN cd login \
     && chmod +x ./script \
     && echo "*/5 * * * * /login/script $user $password" > /etc/crontabs/appuser \
     && crond -l 2 -f > /dev/stdout 2> /dev/stderr \
-    && rc-service crond start
+    && rc-service crond start \
     && rc-update add crond
 
 ENTRYPOINT ["/bin/sh"]
