@@ -1,2 +1,2 @@
-# rub-login
-A script to automaticaly login into the rub
+# rub-login-docker
+Docker container to login tino the HIRN Port
