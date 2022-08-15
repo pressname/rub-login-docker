@@ -1,0 +1,4 @@
+#!/bin/bash
+loginid=$1
+pass=$2
+ping -q -w 1 -c 1 google.at || curl -d "action=Login&code=1&loginid=$loginid&password=$pass" "https://login.rz.ruhr-uni-bochum.de/cgi-bin/laklogin"
