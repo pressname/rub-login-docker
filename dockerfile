@@ -10,6 +10,10 @@ WORKDIR /login
 # Copy login bash script
 COPY ./static/script script
 
+# update
+RUN apk update \
+    && apk upgrade
+
 # Add unpriviliged user
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup \
     && chown -R appuser:appgroup /login \
@@ -17,8 +21,6 @@ RUN addgroup -S appgroup && adduser -S appuser -G appgroup \
 
 USER appuser
 
-RUN apk update \
-    && apk upgrade
 RUN cd login \
     && chmod +x ./script \
     && echo "*/5 * * * * /login/script $user $password" > /etc/crontabs/appuser \
