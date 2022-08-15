@@ -4,22 +4,24 @@ FROM alpine:3.16
 ENV user
 ENV password
 
-# Set the working directory to /app
+# Set the working directory to /login
 WORKDIR /login
 
+# Copy login bash script
+COPY ./static/script script
+
+# Add unpriviliged user
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup \
     && chown -R appuser:appgroup /app \
     && apk add --no-cache gcc
 
 USER appuser
 
-RUN apk update && \
-    apk upgrade && \
-    apk add --no-cache git
-RUN cd login && \
-    git clone https://github.com/pressname/rub-login.git \
-    && chmod +x ./rub-login/script \
-    && echo "*/5 * * * * /login/rub-login/script $user $password" > /etc/crontabs/appuser \
+RUN apk update \
+    && apk upgrade
+RUN cd login \
+    && chmod +x ./script \
+    && echo "*/5 * * * * /login/script $user $password" > /etc/crontabs/appuser \
     && crond -l 2 -f > /dev/stdout 2> /dev/stderr \
     && rc-service crond start
     && rc-update add crond
