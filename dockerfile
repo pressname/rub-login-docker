@@ -12,7 +12,7 @@ COPY ./static/script script
 
 # Add unpriviliged user
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup \
-    && chown -R appuser:appgroup /app \
+    && chown -R appuser:appgroup /login \
     && apk add --no-cache gcc
 
 USER appuser
